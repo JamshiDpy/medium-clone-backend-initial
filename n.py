@@ -16,7 +16,18 @@
 #     return matrix
 #
 # print(pascal_triangle(5))
+from wsgiref.util import request_uri
 
 
-a =  [-4,-1,0,3,10]
+def fibonacci(number):
+    if number < 0:
+        return 'incorrect input'
+    elif number == 0:
+        return 0
+    elif number == 1:
+        return 1
+    else:
+        return fibonacci(number-1) + fibonacci(number-2)
+
+print(fibonacci(number=int(input(': '))))
 
