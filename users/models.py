@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
         db_table = 'user'
         verbose_name = 'User'
         verbose_name_plural = 'Users'
-        ordering = ['date_joined']
+        ordering = ['-date_joined']
 
     def __str__(self):
         if self.full_name:
