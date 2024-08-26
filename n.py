@@ -1,7 +1,22 @@
-a = [2, 0, 4, 0, 0, 1]
+# def pascal_triangle(n):
+#
+#     matrix = []
+#
+#     if n <= 0:
+#         return matrix
+#     matrix = [[1]]
+#
+#     for i in range(1, n):
+#         temp = [1]
+#         for j in range(len(matrix[i - 1]) - 1):
+#             curr = matrix[i - 1]
+#             temp.append(matrix[i - 1][j] + matrix[i - 1][j + 1])
+#         temp.append(1)
+#         matrix.append(temp)
+#     return matrix
+#
+# print(pascal_triangle(5))
 
-def reverse_list(a: list) -> list:
-    a = a[::-1]
-    return a
 
-print(reverse_list(a))
+a =  [-4,-1,0,3,10]
+
