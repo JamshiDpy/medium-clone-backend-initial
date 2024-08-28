@@ -96,6 +96,7 @@ env/
 .venv/
 
 # Custom
+n.py
 .vscode/
 .idea/
 static

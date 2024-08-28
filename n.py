@@ -19,15 +19,28 @@
 from wsgiref.util import request_uri
 
 
-def fibonacci(number):
-    if number < 0:
-        return 'incorrect input'
-    elif number == 0:
-        return 0
-    elif number == 1:
-        return 1
-    else:
-        return fibonacci(number-1) + fibonacci(number-2)
+# def fibonacci(number):
+#     if number < 0:
+#         return 'incorrect input'
+#     elif number == 0:
+#         return 0
+#     elif number == 1:
+#         return 1
+#     else:
+#         return fibonacci(number-1) + fibonacci(number-2)
+#
+# print(fibonacci(number=int(input(': '))))
 
-print(fibonacci(number=int(input(': '))))
+def suv(nums: list):
+    max_list = []
+    for i in range(2):
+        max_in_list = max(nums)
+        max_list.append(max_in_list)
+        nums.remove(max_in_list)
+    return max_list[0] * max_list[1]
+
+print(suv([1,8,6,2,5,4,8,3,7]))
+
+
+
 
