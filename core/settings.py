@@ -31,6 +31,7 @@ DJANGO_APPS = [
 EXTERNAL_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
+'drf_spectacular',
 ]
 
 LOCAL_APPS = [
@@ -127,6 +128,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 #DRF
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -170,6 +172,21 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=60),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=10),
+}
+
+# SPECTACULAR
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Medium',
+    'Description': 'Medium Clone Project',
+    'VERSION': '1.0.0',
+    'SERVER_INCLUDE_SCHEMA': False,
+    'SECURITY_DEFINITION': {
+        'BEARER': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
 }
 
 
