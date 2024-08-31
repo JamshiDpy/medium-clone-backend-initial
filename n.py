@@ -31,15 +31,25 @@ from wsgiref.util import request_uri
 #
 # print(fibonacci(number=int(input(': '))))
 
-def suv(nums: list):
-    max_list = []
-    for i in range(2):
-        max_in_list = max(nums)
-        max_list.append(max_in_list)
-        nums.remove(max_in_list)
-    return max_list[0] * max_list[1]
+def max_area(heights):
+    left = 0
+    right = len(heights) - 1
+    max_water = 0
 
-print(suv([1,8,6,2,5,4,8,3,7]))
+    while left < right:
+        width = right - left
+        height = min(heights[left], heights[right])
+        max_water = max(max_water, width * height)
+
+        if heights[left] < heights[right]:
+            left += 1
+        else:
+            right -= 1
+
+    return max_water
+
+heights = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+print(max_area(heights))
 
 
 

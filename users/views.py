@@ -9,9 +9,9 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-
+# SignUp qilish uchun class
 class SignupView(APIView):
-    serializer_class = UserSerializer()
+    serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
@@ -23,17 +23,20 @@ class SignupView(APIView):
             return Response({
                 'user': user_data,
                 'refresh': str(refresh),
-                'access': str(refresh.access_token)
+                'access': str(refresh.access_token),
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+# Login qilish uchun class
 class LoginView(APIView):
     serializer_class = LoginSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = [permissions.AllowAny]
 
     def post(self, request):
-        serializer = self.serializer_class(request.data)
-        serializer.is_valid()
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
         user = authenticate(
             request,
@@ -43,14 +46,18 @@ class LoginView(APIView):
 
         if user is not None:
             refresh = RefreshToken.for_user(user)
-            return Response({'refresh': str(refresh), 'access': refresh.access_token}, status=status.HTTP_200_OK)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }, status=status.HTTP_200_OK)
         else:
             return Response({'detail': 'Hisob maʼlumotlari yaroqsiz'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 
+# User malumotlarni olish uchum class
 class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
-    http_method_names = ['get']
+    http_method_names = ['get',]
     queryset = User.objects.filter(is_active=True)
     permission_classes = (IsAuthenticated,)
 
@@ -59,3 +66,4 @@ class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
 
     def get_serializer_class(self):
         return UserSerializer
+
