@@ -180,6 +180,7 @@ SPECTACULAR_SETTINGS = {
     'Description': 'Medium Clone Project',
     'VERSION': '1.0.0',
     'SERVER_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
     'SECURITY_DEFINITION': {
         'BEARER': {
             'type': 'apiKey',
