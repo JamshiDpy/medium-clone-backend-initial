@@ -41,7 +41,7 @@ class CustomUser(AbstractUser):
             HashIndex(fields=['first_name'], name='%(class)s_first_name_hash_idx'),
             HashIndex(fields=['last_name'], name='%(class)s_last_name_hash_idx'),
             HashIndex(fields=['middle_name'], name='%(class)s_middle_name_hash_idx'),
-            HashIndex(fields=['username'], name='%(class)s_username_hash_idx'),
+            models.Index(fields=['username'], name='%(class)s_username_hash_idx'),
         ]
 
         constraints = [
