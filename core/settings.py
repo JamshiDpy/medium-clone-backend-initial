@@ -1,6 +1,6 @@
 from pathlib import Path
 from decouple import config
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -17,6 +17,9 @@ SECRET_KEY = config('SECRET_KEY', default='hjg^&%**%%^*GHVGJHGKJGKH')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
+
+BIRTH_YEAR_MIN = 1900
+BIRTH_YEAR_MAX = datetime.now().year
 
 # Application definition
 

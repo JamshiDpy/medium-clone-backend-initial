@@ -18,6 +18,8 @@
 # print(pascal_triangle(5))
 from wsgiref.util import request_uri
 
+from decouple import config
+
 
 # def fibonacci(number):
 #     if number < 0:
@@ -51,17 +53,41 @@ from wsgiref.util import request_uri
 # heights = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 # print(max_area(heights))
 
-def left_right_difference(nums: list) -> list:
-    result = []
-    for i in range(len(nums)):
-        if sum(nums[i+1:]) > sum(nums[:i]):
-            result.append(1)
-        elif sum(nums[:i]) > sum(nums[i+1:]):
-            result.append(-1)
+# def left_right_difference(nums: list) -> list:
+#     result = []
+#     for i in range(len(nums)):
+#         if sum(nums[i+1:]) > sum(nums[:i]):
+#             result.append(1)
+#         elif sum(nums[:i]) > sum(nums[i+1:]):
+#             result.append(-1)
+#         else:
+#             result.append(0)
+#     return result
+#
+# print(left_right_difference([1, 2, 3, 4]))
+
+
+def true_or_false(s: str) -> bool:
+    if len(s) % 2 > 0:
+        return  False
+    s_len = len(s) // 2
+    right = s[:s_len]
+    left = s[-1:s_len - 1:-1]
+    for x, y in dict(zip(right, left)).items():
+        if x == '(' and y == ")":
+            continue
+        elif x == '[' and y == ']':
+            continue
+        elif x == '{' and y == '}':
+            continue
         else:
-            result.append(0)
-    return result
+            return False
+    return True
 
-print(left_right_difference([1, 2, 3, 4]))
+print(true_or_false("((()))"))
 
-
+# a  =  "1234567890"
+# x = len(a) // 2
+# r = a[:x]
+# l = a[-1:x-1:-1]
+# print(dict(zip(r, l)))
