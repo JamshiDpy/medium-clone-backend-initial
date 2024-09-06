@@ -19,6 +19,7 @@
 from wsgiref.util import request_uri
 
 from decouple import config
+from django.db.models.expressions import result
 
 
 # def fibonacci(number):
@@ -93,15 +94,47 @@ from decouple import config
 # print(dict(zip(r, l)))
 
 
-def up_low(word: str) -> bool:
-    if word[0].isupper() and word[1:].islower():
-        return True
-    elif word.islower():
-        return True
-    elif word.isupper():
-        return True
-    return False
+# def up_low(word: str) -> bool:
+#     if word[0].isupper() and word[1:].islower():
+#         return True
+#     elif word.islower():
+#         return True
+#     elif word.isupper():
+#         return True
+#     return False
+#
+#
+# print(up_low('UZBb'))
 
 
-print(up_low('UZBb'))
+def longest_palindromic_substring(s: str) -> str:
+    if not s:
+        return ""
+
+    start = 0
+    end = 0
+
+    def expand_around_center(left: int, right: int):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return left + 1, right - 1
+
+    for i in range(len(s)):
+
+        l1, r1 = expand_around_center(i, i)
+
+        l2, r2 = expand_around_center(i, i + 1)
+
+        if (r1 - l1) > (end - start):
+            start, end = l1, r1
+        if (r2 - l2) > (end - start):
+            start, end = l2, r2
+
+    return s[start:end + 1]
+
+
+# Nümunə
+text = "babad"
+print(longest_palindromic_substring(text))
 
