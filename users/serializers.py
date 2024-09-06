@@ -44,7 +44,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         birth_year = data.get('birth_year')
         if birth_year is not None:
             if not (settings.BIRTH_YEAR_MIN < birth_year < settings.BIRTH_YEAR_MAX):
-                raise serializers.ValidationError({'birth_year': BIRTH_YEAR_ERROR_MSG})
+                raise serializers.ValidationError({"birth_year": BIRTH_YEAR_ERROR_MSG})
         return data
 
 
