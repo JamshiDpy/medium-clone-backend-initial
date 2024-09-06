@@ -67,27 +67,41 @@ from decouple import config
 # print(left_right_difference([1, 2, 3, 4]))
 
 
-def true_or_false(s: str) -> bool:
-    if len(s) % 2 > 0:
-        return  False
-    s_len = len(s) // 2
-    right = s[:s_len]
-    left = s[-1:s_len - 1:-1]
-    for x, y in dict(zip(right, left)).items():
-        if x == '(' and y == ")":
-            continue
-        elif x == '[' and y == ']':
-            continue
-        elif x == '{' and y == '}':
-            continue
-        else:
-            return False
-    return True
-
-print(true_or_false("((()))"))
+# def true_or_false(s: str) -> bool:
+#     if len(s) % 2 > 0:
+#         return  False
+#     s_len = len(s) // 2
+#     right = s[:s_len]
+#     left = s[-1:s_len - 1:-1]
+#     for x, y in dict(zip(right, left)).items():
+#         if x == '(' and y == ")":
+#             continue
+#         elif x == '[' and y == ']':
+#             continue
+#         elif x == '{' and y == '}':
+#             continue
+#         else:
+#             return False
+#     return True
+#
+# print(true_or_false("((()))"))
 
 # a  =  "1234567890"
 # x = len(a) // 2
 # r = a[:x]
 # l = a[-1:x-1:-1]
 # print(dict(zip(r, l)))
+
+
+def up_low(word: str) -> bool:
+    if word[0].isupper() and word[1:].islower():
+        return True
+    elif word.islower():
+        return True
+    elif word.isupper():
+        return True
+    return False
+
+
+print(up_low('UZBb'))
+
