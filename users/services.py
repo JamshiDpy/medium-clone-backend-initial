@@ -4,16 +4,15 @@ import redis
 from decouple import config
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from redis import Redis
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from users.enum import TokenType
+from users.enums import TokenType
 
-REDIS_HOST = config('REDIS_HOST', None)
-REDIS_PORT = config('REDIS_PORT', None)
-REDIS_DB = config('REDIS_DB', None)
-
-USer = get_user_model()
+# redis uchun malumotlarni olamiz
+REDIS_HOST = config("REDIS_HOST", None)
+REDIS_PORT = config("REDIS_PORT", None)
+REDIS_DB = config("REDIS_DB", None)
+User = get_user_model()
 
 class TokenService:
     @classmethod
@@ -28,9 +27,17 @@ class TokenService:
         return valid_tokens
 
     @classmethod
-    def add_token_to_redis(cls, user_id: int, token: str, token_type: TokenType, expire_time: datetime.timedelta) -> None:
+    def add_token_to_redis(
+            cls,
+            user_id: int,
+            token: str,
+            token_type: TokenType,
+            expire_time: datetime.timedelta,
+    ) -> None:
         redis_client = cls.get_redis_client()
+
         token_key = f"user:{user_id}:{token_type}"
+
         valid_tokens = cls.get_valid_tokens(user_id, token_type)
         if valid_tokens:
             cls.delete_tokens(user_id, token_type)
@@ -44,7 +51,6 @@ class TokenService:
         valid_tokens = redis_client.smembers(token_key)
         if valid_tokens is not None:
             redis_client.delete(token_key)
-
 
 class UserService:
 
