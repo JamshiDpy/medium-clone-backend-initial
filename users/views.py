@@ -12,7 +12,7 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 
 from django_redis import get_redis_connection
 
-from .enum import TokenType
+from .enums import TokenType
 from .services import UserService, TokenService
 
 User = get_user_model()

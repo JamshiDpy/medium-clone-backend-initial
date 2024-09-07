@@ -140,4 +140,29 @@ from django.db.models.expressions import result
 # text = "babad"
 # print(longest_palindromic_substring(text))
 
-def long_unique(s: str)
+def long_unique(s: str) -> int:
+    l_s = ''
+    s_s = s[0]
+    for i in range(len(s)):
+        try:
+            if s[i+1] != s_s:
+                l_s += 'y'
+                s_s = s[i+1]
+            else:
+                if l_s != '':
+                    l_s += ','
+                else:
+                    continue
+        except IndexError:
+            if s_s != s[-1]:
+                l_s += 'y'
+    l_l = l_s.split(',')
+    r_l = []
+    for l in l_l:
+        r_l.append(len(l))
+
+    return max(r_l)
+
+
+
+print(long_unique('aseerrllkk'))
