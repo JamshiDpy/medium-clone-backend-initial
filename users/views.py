@@ -82,8 +82,8 @@ class LoginView(APIView):
 
 
 @extend_schema_view(
-    get=extend_schema(
-        summary='Logout a user',
+    post=extend_schema(
+        summary="Log out a user",
         request=None,
         responses={
             200: ValidationErrorSerializer,
@@ -97,7 +97,7 @@ class LogoutView(generics.GenericAPIView):
     @extend_schema(responses=None)
     def post(self, request, *args, **kwargs):
         UserService.create_tokens(request.user, access='fake_token', refresh='fake_token', is_force_add_to_redis=True)
-        return Response({"detail": "Muvafaqqiyatli chiqildi."})
+        return Response({"detail": "Mufaqqiyatli chiqildi."})
 
 
 @extend_schema_view(
