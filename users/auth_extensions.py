@@ -1,0 +1,7 @@
+from drf_spectacular.contrib.rest_framework_simplejwt import SimpleJWTScheme
+
+from .authentication import CustomJWTAuthentication
+
+class CustomJWTAuthenticationSchema(SimpleJWTScheme):
+    name = "CustomJWTAuth"
+    target_class = CustomJWTAuthentication

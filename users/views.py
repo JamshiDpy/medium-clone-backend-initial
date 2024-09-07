@@ -12,6 +12,9 @@ from drf_spectacular.utils import extend_schema, extend_schema_view
 
 from django_redis import get_redis_connection
 
+from .enum import TokenType
+from .services import UserService, TokenService
+
 User = get_user_model()
 
 # SignUp qilish uchun class
@@ -43,9 +46,6 @@ class SignupView(APIView):
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-# Login qilish uchun class
 
 @extend_schema_view(
     post=extend_schema(
@@ -81,8 +81,24 @@ class LoginView(APIView):
             return Response({'detail': 'Hisob maʼlumotlari yaroqsiz'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
+@extend_schema_view(
+    get=extend_schema(
+        summary='Logout a user',
+        request=None,
+        responses={
+            200: ValidationErrorSerializer,
+            401: ValidationErrorSerializer
+        }
+    )
+)
+class LogoutView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
 
-# User malumotlarni olish uchum class
+    @extend_schema(responses=None)
+    def post(self, request, *args, **kwargs):
+        UserService.create_tokens(request.user, access='fake_token', refresh='fake_token', is_force_add_to_redis=True)
+        return Response({"detail": "Muvafaqqiyatli chiqildi."})
+
 
 @extend_schema_view(
     get=extend_schema(
