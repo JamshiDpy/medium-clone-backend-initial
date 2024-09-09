@@ -1,14 +1,18 @@
 import random
+from http.client import responses
 
+from cfgv import ValidationError
 from rest_framework import status, permissions, generics, parsers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+
+from tests.conftest import tokens
 from .serializers import (UserSerializer, LoginSerializer, ValidationErrorSerializer, TokenResponseSerializer,
-                          UserUpdateSerializer)
-from django.contrib.auth import get_user_model
+                          UserUpdateSerializer, ChangePasswordSerializer)
+from django.contrib.auth import get_user_model, update_session_auth_hash
 
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
@@ -138,3 +142,39 @@ class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
         cached_value = redis_conn.get('test_key')
         print(cached_value)
         return super().patch(request, *args, **kwargs)
+
+
+@extend_schema_view(
+    put=extend_schema(
+        summary="Change user password",
+        request=ChangePasswordSerializer,
+        responses={
+            200: TokenResponseSerializer,
+            400: ValidationErrorSerializer
+        }
+    )
+)
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ChangePasswordSerializer
+
+    def put(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = authenticate(
+            request,
+            username=request.user.username,
+            password=serializer.validated_data['old_password']
+        )
+
+        if user is not None:
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+            update_session_auth_hash(request, user)
+            tokens = UserService.create_tokens(user, is_force_add_to_redis=True)
+            return Response(tokens)
+        else:
+            return ValidationError("Eski parol xato")
+
+
