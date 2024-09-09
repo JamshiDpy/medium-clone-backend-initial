@@ -5,8 +5,8 @@ from rest_framework_simplejwt.tokens import Token
 
 from rest_framework_simplejwt.authentication import AuthUser, JWTAuthentication
 
-from users.enums import TokenType        # keyinroq ushbu faylni yaratib olamiz
-from users.services import TokenService  # keyinroq ushbu faylni yaratib olamiz
+from users.enums import TokenType
+from users.services import TokenService
 
 User = get_user_model()
 
@@ -34,4 +34,5 @@ class CustomJWTAuthentication(JWTAuthentication):
         ):
             raise AuthenticationFailed("Kirish ma'lumotlari yaroqsiz")
         return True
+
     
