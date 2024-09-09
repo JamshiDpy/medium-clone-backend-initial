@@ -141,30 +141,20 @@ from django.db.models.expressions import result
 # print(longest_palindromic_substring(text))
 
 def long_unique(s: str) -> int:
-    l_s = s[0]
-    s_s = s[0]
-    for i in range(len(s)):
-        try:
-            if s[i+1] != s_s:
-                l_s += s[i+1]
-                s_s = s[i+1]
-            else:
-                if l_s != '':
-                    l_s += ','
-                else:
-                    continue
-        except IndexError:
-            break
-    l_l = l_s.split(',')
-    print(l_s)
-    r_l = []
-    for l in l_l:
-        r_l.append(len(l))
+    n = len(s)
+    char_set = set()
+    left = 0
+    max_length = 0
 
-    print(l_l)
+    for right in range(n):
+        while s[right] in char_set:
+            char_set.remove(s[left])
+            left += 1
+        char_set.add(s[right])
+        max_length = max(max_length, right - left + 1)
 
-    return max(r_l)
+    return max_length
 
 
 
-print(long_unique("bcabcbb"))
+print(long_unique("bbbbbb"))
