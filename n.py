@@ -16,9 +16,12 @@
 #     return matrix
 #
 # print(pascal_triangle(5))
+from logging import lastResort
+from os import lseek
 from wsgiref.util import request_uri
 
 from decouple import config
+
 from django.db.models.expressions import result
 
 
@@ -140,21 +143,108 @@ from django.db.models.expressions import result
 # text = "babad"
 # print(longest_palindromic_substring(text))
 
-def long_unique(s: str) -> int:
-    n = len(s)
-    char_set = set()
-    left = 0
-    max_length = 0
+# def long_unique(s: str) -> int:
+#     n = len(s)
+#     char_set = set()
+#     left = 0
+#     max_length = 0
+#
+#     for right in range(n):
+#         while s[right] in char_set:
+#             char_set.remove(s[left])
+#             left += 1
+#         char_set.add(s[right])
+#         max_length = max(max_length, right - left + 1)
+#
+#     return max_length
+#
+#
+#
+# print(long_unique("bbbbbb"))
 
-    for right in range(n):
-        while s[right] in char_set:
-            char_set.remove(s[left])
-            left += 1
-        char_set.add(s[right])
-        max_length = max(max_length, right - left + 1)
 
-    return max_length
+# class Node:
+#     def __init__(self, data):
+#         self.data = data
+#         self.next = None
+#
+#
+# class LinkedList:
+#     def __init__(self):
+#         self.head = None
+#
+#
+# llist = LinkedList()
+#
+# llist.head = Node('Dushanba')
+# tuesday = Node('Seshanba')
+# wednesday = Node('Chorshanba')
+#
+# llist.head.next = tuesday
+# tuesday.next = wednesday
+#
+# print(llist.head.data)
+# print(llist.head.next.data)
+# print(llist.head.next.next.data)
 
 
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-print(long_unique("bbbbbb"))
+
+def reverse(head):
+    """
+       ' Reverse a linked list and return the new head node. '
+       list_to_node funksiya listdan Linked List yasab beradi
+       kodni davom etkazing
+    """
+    ll = head
+    array = []
+    while ll.next:
+        array.append(ll.val)
+        ll = ll.next
+    array.append(ll.val)
+
+    last = head
+    new_node = ListNode(last.val)
+    while last.next:
+        new_node.next = ListNode(last.val)
+        last = last.next
+    return new_node
+
+# bu kodlargaga tegmang
+
+def list_to_node(array):
+    if not array:
+        return None
+
+    head = ListNode(array[0])
+    current = head
+
+    for val in array[1:]:
+        current.next = ListNode(val)
+        current = current.next
+
+    return head
+
+
+def node_to_list(head):
+    result = []
+    current = head
+    while current:
+        result.append(current.val)
+        current = current.next
+    return result
+
+
+input_str = input().strip()
+nums = list(map(int, input_str.split(',')))
+
+head = list_to_node(nums)
+reversed_head = reverse(head)
+result = node_to_list(reversed_head)
+print(result)
+
+

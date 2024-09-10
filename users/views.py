@@ -150,7 +150,7 @@ class UsersMe(generics.RetrieveAPIView, generics.UpdateAPIView):
         request=ChangePasswordSerializer,
         responses={
             200: TokenResponseSerializer,
-            400: ValidationErrorSerializer
+            401: ValidationErrorSerializer
         }
     )
 )
@@ -175,6 +175,6 @@ class ChangePasswordView(APIView):
             tokens = UserService.create_tokens(user, is_force_add_to_redis=True)
             return Response(tokens)
         else:
-            return ValidationError("Eski parol xato")
+            raise ValidationError("Eski parol xato.")
 
 
