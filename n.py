@@ -206,13 +206,13 @@ def reverse(head):
         array.append(ll.val)
         ll = ll.next
     array.append(ll.val)
-
-    last = head
-    new_node = ListNode(last.val)
-    while last.next:
-        new_node.next = ListNode(last.val)
-        last = last.next
-    return new_node
+    array.reverse()
+    head = ListNode(array[0])
+    current = head
+    for i in array[1:]:
+        current.next = ListNode(i)
+        current = current.next
+    return head
 
 # bu kodlargaga tegmang
 
