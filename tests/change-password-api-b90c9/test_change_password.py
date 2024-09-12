@@ -21,14 +21,14 @@ def change_password_data(request, user_factory, tokens):
             }
         )
 
-    def incorrect_password():
-        return (
-            400, user, access,
-            {
-                'old_password': '<PASSWORD>',
-                'new_password': new_password
-            }
-        )
+    # def incorrect_password():
+    #     return (
+    #         400, user, access,
+    #         {
+    #             'old_password': '<PASSWORD>',
+    #             'new_password': new_password
+    #         }
+    #     )
 
     def invalid_old_password():
         return (
