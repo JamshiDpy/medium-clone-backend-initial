@@ -23,7 +23,7 @@ from .services import UserService, TokenService, SendEmailService
 
 User = get_user_model()
 
-# SignUp qilish uchun class
+
 @extend_schema_view(
     post=extend_schema(
         summary='Signup a new user',
@@ -112,6 +112,14 @@ class LogoutView(generics.GenericAPIView):
         request=UserSerializer,
         responses={
             200: UserSerializer,
+            400: ValidationErrorSerializer
+        }
+    ),
+    patch=extend_schema(
+        summary="Update user information",
+        request=UserUpdateSerializer,
+        responses={
+            200: UserUpdateSerializer,
             400: ValidationErrorSerializer
         }
     )
