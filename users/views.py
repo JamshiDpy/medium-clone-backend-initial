@@ -10,8 +10,14 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
 
 from tests.conftest import tokens
-from .serializers import (UserSerializer, LoginSerializer, ValidationErrorSerializer, TokenResponseSerializer,
-                          UserUpdateSerializer, ChangePasswordSerializer)
+from .serializers import (
+    UserSerializer,
+    ChangePasswordSerializer,
+    LoginSerializer,
+    ValidationErrorSerializer,
+    TokenResponseSerializer,
+    UserUpdateSerializer,
+)
 from django.contrib.auth import get_user_model, update_session_auth_hash
 
 from drf_spectacular.utils import extend_schema, extend_schema_view
