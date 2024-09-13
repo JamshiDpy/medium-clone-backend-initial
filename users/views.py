@@ -1,7 +1,7 @@
 import random
 from http.client import responses
 
-from cfgv import ValidationError
+from rest_framework.exceptions import ValidationError
 from rest_framework import status, permissions, generics, parsers
 from rest_framework.response import Response
 from rest_framework.views import APIView
