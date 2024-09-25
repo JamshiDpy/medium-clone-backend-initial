@@ -188,63 +188,95 @@ from django.db.models.expressions import result
 # print(llist.head.next.next.data)
 
 
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-
-def reverse(head):
-    """
-       ' Reverse a linked list and return the new head node. '
-       list_to_node funksiya listdan Linked List yasab beradi
-       kodni davom etkazing
-    """
-    ll = head
-    array = []
-    while ll.next:
-        array.append(ll.val)
-        ll = ll.next
-    array.append(ll.val)
-    array.reverse()
-    head = ListNode(array[0])
-    current = head
-    for i in array[1:]:
-        current.next = ListNode(i)
-        current = current.next
-    return head
-
-# bu kodlargaga tegmang
-
-def list_to_node(array):
-    if not array:
-        return None
-
-    head = ListNode(array[0])
-    current = head
-
-    for val in array[1:]:
-        current.next = ListNode(val)
-        current = current.next
-
-    return head
-
-
-def node_to_list(head):
-    result = []
-    current = head
-    while current:
-        result.append(current.val)
-        current = current.next
-    return result
-
-
-input_str = input().strip()
-nums = list(map(int, input_str.split(',')))
-
-head = list_to_node(nums)
-reversed_head = reverse(head)
-result = node_to_list(reversed_head)
-print(result)
-
-
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+#
+# def reverse(head):
+#     """
+#        ' Reverse a linked list and return the new head node. '
+#        list_to_node funksiya listdan Linked List yasab beradi
+#        kodni davom etkazing
+#     """
+#     ll = head
+#     array = []
+#     while ll.next:
+#         array.append(ll.val)
+#         ll = ll.next
+#     array.append(ll.val)
+#     array.reverse()
+#     head = ListNode(array[0])
+#     current = head
+#     for i in array[1:]:
+#         current.next = ListNode(i)
+#         current = current.next
+#     return head
+#
+# # bu kodlargaga tegmang
+#
+# def list_to_node(array):
+#     if not array:
+#         return None
+#
+#     head = ListNode(array[0])
+#     current = head
+#
+#     for val in array[1:]:
+#         current.next = ListNode(val)
+#         current = current.next
+#
+#     return head
+#
+#
+# def node_to_list(head):
+#     result = []
+#     current = head
+#     while current:
+#         result.append(current.val)
+#         current = current.next
+#     return result
+#
+#
+# input_str = input().strip()
+# nums = list(map(int, input_str.split(',')))
+#
+# head = list_to_node(nums)
+# reversed_head = reverse(head)
+# result = node_to_list(reversed_head)
+# print(result)
+# class Node:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = None
+#
+#
+# def is_palindrome(head: Node) -> bool:
+#     elements = []
+#     current = head
+#     while current:
+#         elements.append(current.val)
+#         current = current.next
+#     return elements == elements[::-1]
+#
+#
+# def create_linked_list(values):
+#     if not values:
+#         return None
+#
+#     head = Node(values[0])
+#     current = head
+#     for value in values[1:]:
+#         current.next = Node(value)
+#         current = current.next
+#
+#     return head
+#
+#
+# input_str = input().strip()
+# nums = list(map(int, input_str.split(',')))
+#
+# head = create_linked_list(nums)
+# result = is_palindrome(head)
+# print(result)
