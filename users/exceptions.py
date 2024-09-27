@@ -5,5 +5,5 @@ from django.utils.translation import gettext_lazy as _
 
 class OTPException(APIException):
     status_code = status.HTTP_400_BAD_REQUEST
-    default_detail = _('OTP verifications failed')
+    default_detail = _('OTP tekshiruvlari muvaffaqiyatsiz tugadi.')
     default_code = 'otp_failed'
