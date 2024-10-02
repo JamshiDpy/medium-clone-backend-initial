@@ -280,3 +280,8 @@ from django.db.models.expressions import result
 # head = create_linked_list(nums)
 # result = is_palindrome(head)
 # print(result)
+
+
+a = '1,2,3,4,5,6,7,8,9'
+
+ 
